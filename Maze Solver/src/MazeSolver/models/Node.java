@@ -14,6 +14,7 @@ public class Node {
     public static final int cellSize = 50;
     public static final Color cellEmptyColor = new Color(142, 150, 116, 255);
     public static final Color cellStartColor = new Color(100, 245, 78);
+    public static final Color cellInaccessibleColor = new Color(220, 14, 14);
     public static final Color cellBorderColor = new Color(0, 0, 0);
     public static final Color cellWallColor = new Color(0, 0, 0);
 

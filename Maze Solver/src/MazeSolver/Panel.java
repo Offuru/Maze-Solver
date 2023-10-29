@@ -118,6 +118,14 @@ public class Panel extends JPanel {
     }
 
     public void setStartNode(Node startNode) {
+
+        if (this.startNode != null) {
+            for (List<Node> row : maze.getMatrix())
+                for (Node node : row)
+                    if (node.getKey() != -1)
+                        node.setCellColor(Node.cellEmptyColor);
+        }
+
         if (this.startNode != null)
             this.startNode.setCellColor(Node.cellEmptyColor);
         this.startNode = startNode;

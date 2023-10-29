@@ -17,7 +17,7 @@ public class PathsManager {
     private List<List<Node>> paths;
     private final Panel panel;
     private int currentPath;
-    private static final Color arrowColor = new Color(206, 68, 68);
+    private static final Color arrowColor = new Color(66, 222, 200);
 
     public PathsManager(Panel panel) {
         this.panel = panel;

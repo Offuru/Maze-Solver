@@ -83,6 +83,18 @@ public class BFS {
                 paths.get(paths.size() - 1).add(start);
             }
 
+        for (Node exit : exits) {
+            boolean found = false;
+            for (List<Node> path : paths)
+                if (path.get(0) == exit) {
+                    found = true;
+                    break;
+                }
+
+            if (!found)
+                exit.setCellColor(Node.cellInaccessibleColor);
+        }
+
         return paths;
     }
 
