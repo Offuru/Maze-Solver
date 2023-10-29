@@ -13,6 +13,7 @@ public class Maze {
     private final int y;
     private final int width;
     private final int height;
+    private int nodeCount;
 
     public Maze(Panel panel, int height, int width) {
 
@@ -20,6 +21,7 @@ public class Maze {
         this.width = width;
         this.x = (800 - width * Node.cellSize) / 2;
         this.y = (800 - height * Node.cellSize) / 2;
+        nodeCount = 0;
 
         matrix = new ArrayList<>();
 
@@ -63,5 +65,17 @@ public class Maze {
         for (List<Node> row : matrix)
             for (Node node : row)
                 node.draw(g);
+    }
+
+    public int getNodeCount() {
+        return nodeCount;
+    }
+
+    public void setNodeCount(int nodeCount) {
+        this.nodeCount = nodeCount;
+    }
+
+    public boolean isInside(int i, int j) {
+        return (0 <= i && i < height && 0 <= j && j < width);
     }
 }

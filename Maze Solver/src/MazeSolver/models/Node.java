@@ -35,6 +35,10 @@ public class Node {
         return key;
     }
 
+    public Color getCellColor() {
+        return cellColor;
+    }
+
     public void setCellColor(Color cellColor) {
         this.cellColor = cellColor;
     }

@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import MazeSolver.models.Graph;
 import MazeSolver.models.Maze;
 import MazeSolver.models.Node;
 
@@ -20,11 +21,7 @@ public class Panel extends JPanel {
     public Panel(String filePath) {
         setBackground(backgroundColor);
         buildMaze(filePath);
-        for (List<Node> row : maze.getMatrix()) {
-            for (Node node : row)
-                System.out.print(node.getKey() + " ");
-            System.out.println();
-        }
+        Graph graph = new Graph(maze);
 
         repaint();
     }
@@ -57,7 +54,7 @@ public class Panel extends JPanel {
                             break;
                     }
                 }
-
+            maze.setNodeCount(n);
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -71,7 +68,6 @@ public class Panel extends JPanel {
         super.paintComponent(g);
 
         maze.draw(g);
-
 
         setFocusable(true);
         requestFocusInWindow();
