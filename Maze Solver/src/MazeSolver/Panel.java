@@ -4,11 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 import MazeSolver.algorithms.BFS;
+import MazeSolver.managers.PathsManager;
 import MazeSolver.models.Graph;
 import MazeSolver.models.Maze;
 import MazeSolver.models.Node;
@@ -16,7 +18,9 @@ import MazeSolver.models.Node;
 public class Panel extends JPanel {
 
     private Maze maze;
-    Node startNode;
+    private Node startNode;
+    private List<List<Node>> paths;
+    private final PathsManager pathsManager;
     private static final Color backgroundColor = new Color(86, 151, 206);
 
     public Panel(String filePath) {
@@ -24,7 +28,9 @@ public class Panel extends JPanel {
         buildMaze(filePath);
         Graph graph = new Graph(maze);
         BFS bfs = new BFS(graph, startNode, maze);
-        bfs.getPaths();
+        paths = bfs.getPaths();
+        pathsManager = new PathsManager(this);
+
         repaint();
     }
 
@@ -71,7 +77,17 @@ public class Panel extends JPanel {
 
         maze.draw(g);
 
+        pathsManager.drawPath(g);
+
         setFocusable(true);
         requestFocusInWindow();
+    }
+
+    public List<List<Node>> getPaths() {
+        return paths;
+    }
+
+    public PathsManager getPathsManager() {
+        return pathsManager;
     }
 }

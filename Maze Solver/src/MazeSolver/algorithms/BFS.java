@@ -50,18 +50,6 @@ public class BFS {
                     frontier.add(neighbour);
                 }
         }
-
-        for (Node node : parents) {
-            if (node == null)
-                System.out.print("-1 ");
-            else
-                System.out.print(node.getKey() + " ");
-        }
-
-        System.out.println();
-
-        for (Integer dist : distance)
-            System.out.print((dist == Integer.MAX_VALUE ? "Inf" : dist) + " ");
     }
 
     public List<List<Node>> getPaths() {
@@ -94,15 +82,6 @@ public class BFS {
                 }
                 paths.get(paths.size() - 1).add(start);
             }
-
-        System.out.println();
-        System.out.println();
-        for (List<Node> list : paths) {
-            for (Node node : list) {
-                System.out.print(node.getKey() + " ");
-            }
-            System.out.println();
-        }
 
         return paths;
     }

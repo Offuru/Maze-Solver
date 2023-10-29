@@ -34,15 +34,6 @@ public class Graph {
                 }
         }
 
-        for(int i=0;i<adjacencyList.size();i++){
-            System.out.print(i+": ");
-            for(Node node: adjacencyList.get(i)){
-                System.out.print(node.getKey() + " ");
-            }
-            System.out.println();
-        }
-
-
     }
 
     public List<List<Node>> getAdjacencyList() {
