@@ -23,8 +23,8 @@ public class Panel extends JPanel {
         setBackground(backgroundColor);
         buildMaze(filePath);
         Graph graph = new Graph(maze);
-        BFS bfs = new BFS(graph, startNode);
-
+        BFS bfs = new BFS(graph, startNode, maze);
+        bfs.getPaths();
         repaint();
     }
 
