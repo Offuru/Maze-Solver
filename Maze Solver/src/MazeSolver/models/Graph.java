@@ -42,6 +42,14 @@ public class Graph {
             System.out.println();
         }
 
+
     }
 
+    public List<List<Node>> getAdjacencyList() {
+        return adjacencyList;
+    }
+
+    public List<Node> getNodes() {
+        return nodes;
+    }
 }

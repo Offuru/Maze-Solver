@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import MazeSolver.algorithms.BFS;
 import MazeSolver.models.Graph;
 import MazeSolver.models.Maze;
 import MazeSolver.models.Node;
@@ -22,6 +23,7 @@ public class Panel extends JPanel {
         setBackground(backgroundColor);
         buildMaze(filePath);
         Graph graph = new Graph(maze);
+        BFS bfs = new BFS(graph, startNode);
 
         repaint();
     }
