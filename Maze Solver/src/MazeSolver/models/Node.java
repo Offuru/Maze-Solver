@@ -2,6 +2,7 @@ package MazeSolver.models;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class Node {
 
@@ -47,13 +48,16 @@ public class Node {
         this.key = key;
     }
 
-    void draw(Graphics g){
+    public void draw(Graphics g) {
 
         g.setColor(cellColor);
         g.fillRect(x, y, cellSize, cellSize);
         g.setColor(cellBorderColor);
         g.drawRect(x, y, cellSize, cellSize);
-        g.drawString(((Integer)key).toString(), x + cellSize / 2, y + cellSize / 2);
+        g.drawString(((Integer) key).toString(), x + cellSize / 2, y + cellSize / 2);
+    }
 
+    public boolean containsPoint(Point point) {
+        return x <= point.x && point.x < x + cellSize && y <= point.y && point.y < y + cellSize;
     }
 }

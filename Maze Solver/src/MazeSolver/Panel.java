@@ -1,15 +1,19 @@
 package MazeSolver;
 
 import javax.swing.*;
+import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
+import java.security.Key;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 import MazeSolver.algorithms.BFS;
+import MazeSolver.listeners.KeyboardListener;
+import MazeSolver.listeners.MouseListener;
 import MazeSolver.managers.PathsManager;
 import MazeSolver.models.Graph;
 import MazeSolver.models.Maze;
@@ -18,18 +22,32 @@ import MazeSolver.models.Node;
 public class Panel extends JPanel {
 
     private Maze maze;
+    private Graphics graphics;
     private Node startNode;
     private List<List<Node>> paths;
     private final PathsManager pathsManager;
+    private final KeyboardListener keyboardListener;
+    private final MouseListener mouseListener;
+    private final Graph graph;
     private static final Color backgroundColor = new Color(86, 151, 206);
 
+    private BFS bfs;
+
     public Panel(String filePath) {
+
+        setFocusable(true);
+        requestFocusInWindow();
+
         setBackground(backgroundColor);
         buildMaze(filePath);
-        Graph graph = new Graph(maze);
-        BFS bfs = new BFS(graph, startNode, maze);
-        paths = bfs.getPaths();
+        graph = new Graph(maze);
+        if (startNode != null) {
+            bfs = new BFS(graph, startNode, maze);
+            paths = bfs.getPaths();
+        }
         pathsManager = new PathsManager(this);
+        addKeyListener(keyboardListener = new KeyboardListener(this));
+        addMouseListener(mouseListener = new MouseListener(this));
 
         repaint();
     }
@@ -48,10 +66,10 @@ public class Panel extends JPanel {
                     int value = sc.nextInt();
 
                     switch (value) {
-                        case 0:
+                        case 1:
                             maze.getNode(i, j).setCellColor(Node.cellWallColor);
                             break;
-                        case 1:
+                        case 0:
                             maze.getNode(i, j).setCellColor(Node.cellEmptyColor);
                             maze.getNode(i, j).setKey(n++);
                             break;
@@ -76,8 +94,8 @@ public class Panel extends JPanel {
         super.paintComponent(g);
 
         maze.draw(g);
-
-        pathsManager.drawPath(g);
+        if (paths != null)
+            pathsManager.drawPath(g);
 
         setFocusable(true);
         requestFocusInWindow();
@@ -89,5 +107,26 @@ public class Panel extends JPanel {
 
     public PathsManager getPathsManager() {
         return pathsManager;
+    }
+
+    public Maze getMaze() {
+        return maze;
+    }
+
+    public Node getStartNode() {
+        return startNode;
+    }
+
+    public void setStartNode(Node startNode) {
+        if (this.startNode != null)
+            this.startNode.setCellColor(Node.cellEmptyColor);
+        this.startNode = startNode;
+        this.startNode.setCellColor(Node.cellStartColor);
+        bfs = new BFS(graph, this.startNode, maze);
+        paths = bfs.getPaths();
+        pathsManager.setPaths(paths);
+        pathsManager.setCurrentPath(0);
+
+        repaint();
     }
 }
