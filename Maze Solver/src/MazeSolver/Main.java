@@ -1,3 +1,5 @@
+package MazeSolver;
+
 import javax.swing.*;
 
 public class Main {

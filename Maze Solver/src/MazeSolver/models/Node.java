@@ -1,11 +1,11 @@
-package models;
+package MazeSolver.models;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 public class Node {
 
-    private final int key;
+    private int key;
     private final int x;
     private final int y;
     private Color cellColor;
@@ -37,6 +37,10 @@ public class Node {
 
     public void setCellColor(Color cellColor) {
         this.cellColor = cellColor;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
     }
 
     void draw(Graphics g){
