@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Graphics;
 
-import MazeSolver.Panel;
-
 public class Maze {
 
     private final List<List<Node>> matrix;
-    private final int x;
-    private final int y;
+    private int x;
+    private int y;
     private final int width;
     private final int height;
     private int nodeCount;
 
-    public Maze(Panel panel, int height, int width) {
+    public Maze(int height, int width) {
 
         this.height = height;
         this.width = width;
@@ -46,18 +44,21 @@ public class Maze {
         return matrix.get(i).get(j);
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public List<List<Node>> getMatrix() {
         return matrix;
     }
 
-    public Node getNode(int key) {
-
-        for (List<Node> row : matrix)
-            for (Node node : row)
-                if (node.getKey() == key)
-                    return node;
-
-        return null;
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public void draw(Graphics g) {

@@ -1,10 +1,8 @@
 package MazeSolver.listeners;
 
 import java.awt.event.MouseEvent;
-import javax.swing.event.MouseInputListener;
 
 import MazeSolver.Panel;
-import MazeSolver.models.Node;
 
 public class MouseListener implements javax.swing.event.MouseInputListener {
 

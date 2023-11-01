@@ -1,7 +1,5 @@
 package MazeSolver.models;
 
-import MazeSolver.Panel;
-
 import java.util.List;
 import java.util.ArrayList;
 

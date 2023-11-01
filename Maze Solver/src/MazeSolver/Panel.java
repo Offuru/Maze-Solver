@@ -1,15 +1,11 @@
 package MazeSolver;
 
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.security.Key;
 import java.util.Scanner;
 import java.util.List;
-import java.util.ArrayList;
 
 import MazeSolver.algorithms.BFS;
 import MazeSolver.listeners.KeyboardListener;
@@ -22,7 +18,6 @@ import MazeSolver.models.Node;
 public class Panel extends JPanel {
 
     private Maze maze;
-    private Graphics graphics;
     private Node startNode;
     private List<List<Node>> paths;
     private final PathsManager pathsManager;
@@ -41,23 +36,26 @@ public class Panel extends JPanel {
         setBackground(backgroundColor);
         buildMaze(filePath);
         graph = new Graph(maze);
+
         if (startNode != null) {
             bfs = new BFS(graph, startNode, maze);
             paths = bfs.getPaths();
         }
+
         pathsManager = new PathsManager(this);
+
         addKeyListener(keyboardListener = new KeyboardListener(this));
         addMouseListener(mouseListener = new MouseListener(this));
 
         repaint();
     }
 
-    private final void buildMaze(String filePath) {
+    private void buildMaze(String filePath) {
 
         File file = new File(filePath);
         try {
             Scanner sc = new Scanner(file);
-            maze = new Maze(this, sc.nextInt(), sc.nextInt());
+            maze = new Maze(sc.nextInt(), sc.nextInt());
             int n = 0;
 
             for (int i = 0; i < maze.getHeight(); i++)
@@ -66,10 +64,10 @@ public class Panel extends JPanel {
                     int value = sc.nextInt();
 
                     switch (value) {
-                        case 1:
+                        case 0:
                             maze.getNode(i, j).setCellColor(Node.cellWallColor);
                             break;
-                        case 0:
+                        case 1:
                             maze.getNode(i, j).setCellColor(Node.cellEmptyColor);
                             maze.getNode(i, j).setKey(n++);
                             break;

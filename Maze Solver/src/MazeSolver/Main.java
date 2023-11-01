@@ -1,5 +1,7 @@
 package MazeSolver;
 
+import MazeSolver.listeners.FrameListener;
+
 import javax.swing.*;
 
 public class Main {
@@ -12,6 +14,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel = new Panel("labyrinth.txt"));
         frame.setSize(800, 800);
+        frame.addComponentListener(new FrameListener(frame, panel));
         frame.setVisible(true);
         frame.setFocusable(true);
         frame.requestFocusInWindow();

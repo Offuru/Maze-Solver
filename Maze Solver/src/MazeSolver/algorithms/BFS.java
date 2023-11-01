@@ -2,7 +2,6 @@ package MazeSolver.algorithms;
 
 import MazeSolver.models.*;
 
-import javax.swing.text.Style;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class BFS {
                 exits.add(maze.getNode(i, maze.getWidth() - 1));
         }
 
-        for (int j = 1; j < maze.getHeight() - 1; j++) {
+        for (int j = 1; j < maze.getWidth() - 1; j++) {
             if (maze.getNode(0, j).getKey() != -1)
                 exits.add(maze.getNode(0, j));
             if (maze.getNode(maze.getHeight() - 1, j).getKey() != -1)

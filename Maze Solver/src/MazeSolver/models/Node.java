@@ -7,8 +7,8 @@ import java.awt.Point;
 public class Node {
 
     private int key;
-    private final int x;
-    private final int y;
+    private int x;
+    private int y;
     private Color cellColor;
 
     public static final int cellSize = 50;
@@ -37,10 +37,6 @@ public class Node {
         return key;
     }
 
-    public Color getCellColor() {
-        return cellColor;
-    }
-
     public void setCellColor(Color cellColor) {
         this.cellColor = cellColor;
     }
@@ -49,16 +45,22 @@ public class Node {
         this.key = key;
     }
 
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public void draw(Graphics g) {
 
         g.setColor(cellColor);
         g.fillRect(x, y, cellSize, cellSize);
         g.setColor(cellBorderColor);
         g.drawRect(x, y, cellSize, cellSize);
-        g.drawString(((Integer) key).toString(), x + cellSize / 2, y + cellSize / 2);
     }
 
     public boolean containsPoint(Point point) {
         return x <= point.x && point.x < x + cellSize && y <= point.y && point.y < y + cellSize;
     }
+
+
 }

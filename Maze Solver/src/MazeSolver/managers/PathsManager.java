@@ -1,13 +1,9 @@
 package MazeSolver.managers;
 
 import java.awt.*;
-import javax.swing.*;
 import java.awt.geom.AffineTransform;
 import java.util.List;
-import java.util.ArrayList;
 
-import MazeSolver.models.Graph;
-import MazeSolver.models.Maze;
 import MazeSolver.models.Node;
 import MazeSolver.Panel;
 
@@ -21,22 +17,21 @@ public class PathsManager {
 
     public PathsManager(Panel panel) {
         this.panel = panel;
-        paths = panel.getPaths();
-        currentPath = 1;
 
-        for(int i=0;i<paths.size();i++){
-            for(Node node:paths.get(i)){
-                System.out.print(node.getKey()+" ");
-            }
-            System.out.println();
-        }
-        System.out.println();
+        if (panel.getStartNode() == null)
+            return;
+
+        paths = panel.getPaths();
+        currentPath = 0;
     }
 
     public void drawPath(Graphics g) {
 
         panel.setFocusable(true);
         panel.requestFocusInWindow();
+
+        if (paths.isEmpty())
+            return;
 
         for (int i = 0; i < paths.get(currentPath).size() - 1; i++) {
             Node nodeA = paths.get(currentPath).get(i);
@@ -69,11 +64,11 @@ public class PathsManager {
         this.paths = paths;
     }
 
-    public void nextPath(Graphics g) {
+    public void nextPath() {
         currentPath = (currentPath + 1) % paths.size();
     }
 
-    public void prevPath(Graphics g) {
+    public void prevPath() {
         currentPath--;
         if (currentPath < 0)
             currentPath = paths.size() - 1;
